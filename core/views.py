@@ -57,7 +57,9 @@ class ColaboradorCreate(View):
             sexo_choices = request.POST['sexo']
             #foto_colaborador = request.POST['foto_colaborador']
             departamento = request.POST['departamento']
+            departamento = Departamento.objects.get(nomeDepartamento=departamento)
             funcao = request.POST['funcao']
+            funcao = Funcao.objects.get(nomeFuncao = funcao)
 
             colaborador= Colaborador.objects.get_or_create(nome=nome,
                                                     nascimento=nascimento, rg=rg,
