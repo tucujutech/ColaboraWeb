@@ -22,6 +22,7 @@
                     <tr>
                       <th>#</th>
                       <th>Departamento</th>
+                      <th>Descrição</th>
                       <th>Ações</th>
                     </tr>
                   </thead>
@@ -30,6 +31,7 @@
                        <tr>
                          <td>{{forloop.counter}}</td>
                          <td>{{depart.nomeDepartamento}}</td>
+                         <td>{{depart.descricao}}</td>
                          <td>
                             <a href="#"> <button type="button" class="btn bg-gradient-secondary" data-toggle="tooltip" data-placement="top" title="Detalhes"><i class="fas fa-file"></i></button></a>
                             <a href="{% url 'departamentoDelete' pk=depart.id %}"> <button type="button" class="btn bg-gradient-danger" data-toggle="tooltip" data-placement="top" title="Deletar"><i class="fas fa-trash"></i></button></a>
@@ -43,7 +45,7 @@
             </div>
             <!-- /.card -->
             <!-- Modal -->
-<div class="modal fade" id="registerNewdepartmentModal" tabindex="-1" role="dialog" aria-labelledby="registerNewdepartmentModal" aria-hidden="true">
+<div class="modal fade" id="registerNewdepartmentModal"  role="dialog" aria-labelledby="registerNewdepartmentModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -58,6 +60,10 @@
           <div class="form-group">
             <label for="departamento">Departamento</label>
             <input type="text" class="form-control" placeholder="Departamento" required id="departamento" name="nomeDepartamento">
+          </div>
+          <div class="form-group">
+              <label for="descricao">Descrição do Departamento</label>
+              <input type="text" class="form-control" name="descricao" required placeholder="Descrição do Departamento" />
           </div>
       </div>
       <div class="modal-footer">

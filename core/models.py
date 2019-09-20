@@ -21,9 +21,9 @@ class Colaborador(models.Model):
     #)
     sexo_choices = models.CharField(max_length=2, null=False)
 
-    departamento = models.ForeignKey(Departamento , on_delete=models.CASCADE, to_field='nomeDepartamento')
+    departamento = models.ForeignKey(Departamento , on_delete=models.CASCADE)
 
-    funcao = models.ForeignKey(Funcao, on_delete=models.CASCADE, to_field='nomeFuncao')
+    funcao = models.ForeignKey(Funcao, on_delete=models.CASCADE)
 
     foto_colaborador = models.BinaryField(max_length=None, editable=True)
 

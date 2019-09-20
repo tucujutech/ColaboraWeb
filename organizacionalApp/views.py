@@ -19,8 +19,9 @@ class DerpartmentView(View):
 
     def post(self,request):
         nomeDepartamento = request.POST['nomeDepartamento']
+        descricao = request.POST['descricao']
 
-        departamento = Departamento.objects.create(nomeDepartamento=nomeDepartamento)
+        departamento = Departamento.objects.create(nomeDepartamento=nomeDepartamento, descricao=descricao)
         departamento.save()
         messages.success(request,'Departamento Registrado Com Sucesso!')
         return redirect('departamentos')
