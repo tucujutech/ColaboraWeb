@@ -56,18 +56,21 @@ class ColaboradorCreate(View):
             cnh_tipo= request.POST['cnh_tipo']
             sexo_choices = request.POST['sexo']
             #foto_colaborador = request.POST['foto_colaborador']
+            departamento = request.POST['departamento']
+            funcao = request.POST['funcao']
 
             colaborador= Colaborador.objects.get_or_create(nome=nome,
                                                     nascimento=nascimento, rg=rg,
                                                     cpf=cpf, telefone=telefone,
-                                                    cnh=cnh, cnh_tipo=cnh_tipo, sexo_choices=sexo_choices)
+                                                    cnh=cnh, cnh_tipo=cnh_tipo, sexo_choices=sexo_choices
+                                                           ,departamento=departamento, funcao=funcao)
             colaborador.save()
-        return redirect('colabList/')
+        return redirect('colabList')
 
 
 class ColabList(ListView):
     model = Colaborador
-    template_name = 'colaborador/colabList.html'
+    template_name = 'colaborador/listaColaborador.html'
 
 
 
