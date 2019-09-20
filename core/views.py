@@ -65,7 +65,7 @@ class ColaboradorCreate(View):
                                                     cnh=cnh, cnh_tipo=cnh_tipo, sexo_choices=sexo_choices
                                                            ,departamento=departamento, funcao=funcao)
             colaborador.save()
-        return redirect('colabList')
+        return redirect('listaColaborador')
 
 
 class ColabList(ListView):
