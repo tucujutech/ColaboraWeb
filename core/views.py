@@ -70,7 +70,7 @@ class ColaboradorCreate(View):
 
 class ColabList(ListView):
     model = Colaborador
-    template_name = 'colaborador/listaColaborador.html'
+    template_name = 'core/colaborador/listaColaborador.html'
 
 
 
