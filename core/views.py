@@ -6,8 +6,14 @@ from django.views.generic.base import View
 
 from core.models import Colaborador, Formacao, Departamento, Funcao
 
+# ============= Login View ==========================================
+class LoginView(View):
+    def get(self,request):
+        return render(request, template_name='login/login.html')
 
-def dashboard(request, template_name='base.html'):
+
+
+def dashboard(request, template_name='core/dashboard.html'):
     return render(request, template_name)
 
 # =============== Security ================================================
@@ -56,23 +62,24 @@ class ColaboradorCreate(View):
             cnh_tipo= request.POST['cnh_tipo']
             sexo_choices = request.POST['sexo']
             #foto_colaborador = request.POST['foto_colaborador']
-            departamento = request.POST['departamento']
-            departamento = Departamento.objects.get(nomeDepartamento=departamento)
             funcao = request.POST['funcao']
             funcao = Funcao.objects.get(nomeFuncao = funcao)
+            departamento = request.POST['departamento']
+            departamento = Departamento.objects.get(nomeDepartamento = departamento)
 
-            colaborador= Colaborador.objects.get_or_create(nome=nome,
+            colaborador,created= Colaborador.objects.get_or_create(nome=nome,
                                                     nascimento=nascimento, rg=rg,
                                                     cpf=cpf, telefone=telefone,
-                                                    cnh=cnh, cnh_tipo=cnh_tipo, sexo_choices=sexo_choices
-                                                           ,departamento=departamento, funcao=funcao)
+                                                    cnh=cnh, cnh_tipo=cnh_tipo, sexo_choices=sexo_choices,
+                                                           funcao =funcao, departamento=departamento)
+
             colaborador.save()
-        return redirect('listaColaborador')
+        return redirect('colabList')
 
 
 class ColabList(ListView):
     model = Colaborador
-    template_name = 'core/colaborador/listaColaborador.html'
+    template_name = 'core/colaborador/colabList.html'
 
 
 

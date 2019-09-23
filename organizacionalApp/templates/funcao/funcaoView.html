@@ -22,7 +22,6 @@
                     <tr>
                       <th>#</th>
                       <th>Função</th>
-                      <th>Departamento</th>
                       <th>Ações</th>
                     </tr>
                   </thead>
@@ -31,7 +30,6 @@
                        <tr>
                          <td>{{forloop.counter}}</td>
                           <td>{{func.nomeFuncao}}</td>
-                          <td>{{func.departamento}}</td>
                          <td>
                             <a href="#"> <button type="button" class="btn bg-gradient-secondary" data-toggle="tooltip" data-placement="top" title="Detalhes"><i class="fas fa-file"></i></button></a>
                             <a href="{% url 'funcaoDelete' pk=func.id %}"> <button type="button" class="btn bg-gradient-danger" data-toggle="tooltip" data-placement="top" title="Deletar"><i class="fas fa-trash"></i></button></a>
@@ -60,15 +58,6 @@
           <div class="form-group">
             <label for="nome">Função ou Cargo</label>
             <input type="text" class="form-control" placeholder="Função ou Cargo" required id="nome" name="nomeFuncao">
-          </div>
-          <div class="form-group">
-              <label for="departamento">Departamento</label>
-              <select name="departamento" class="form-control" id="departamento">
-                        <option value="">Departamento</option>
-                        {% for obj in object %}
-                        <option value="{{obj}}">{{obj}}</option>
-                        {% endfor %}
-                    </select>
           </div>
       </div>
       <div class="modal-footer">

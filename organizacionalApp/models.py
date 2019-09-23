@@ -14,7 +14,6 @@ class Departamento(models.Model):
 
 class Funcao(models.Model):
     nomeFuncao = models.CharField(max_length=20, null = False)
-    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'Funcao'

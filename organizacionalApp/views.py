@@ -36,17 +36,13 @@ class DerpartmentView(View):
 class FuncaoView(View):
 
     def get(self, request):
-        depart = Departamento.objects.values_list('nomeDepartamento', flat=True)
         funcaolista= Funcao.objects.all()
         template_name = 'funcao/funcaoView.html'
-        return render(request, template_name, context={'object': depart, 'object2':funcaolista})
+        return render(request, template_name, context={'object2':funcaolista})
 
     def post(self,request):
         nomeFuncao= request.POST['nomeFuncao']
-        departamento = request.POST['departamento']
-        departamento = Departamento.objects.get(nomeDepartamento=departamento)
-
-        funcao=Funcao.objects.create(nomeFuncao=nomeFuncao, departamento=departamento)
+        funcao=Funcao.objects.create(nomeFuncao=nomeFuncao)
         funcao.save()
         return redirect('funcaoView')
 
