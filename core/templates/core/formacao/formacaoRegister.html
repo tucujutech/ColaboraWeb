@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title_content %} Registro de Formações {% endblock %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-header" style="background-color:#20c6b6">
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+              <div class="row">
+                  <div class="col">
+                      <div class="form-group">
+                          <select class="form-control select2" name="colaborador" required>
+                              <option value="">Colaborador</option>
+                              {% for colaboradores in colaborador %}
+                              <option value="{{colaboradores}}">{{colaboradores}}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="form-group">
+                          <select class="form-control" name="tipo_formacao" required>
+                              <option value="">Tipo de Formação</option>
+                              {% for tipo in tipoformacao %}
+                              <option value="{{tipo}}">{{tipo}}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="form-group">
+                          <input class="form-control" type="text" name="nome_curso" required placeholder="Nome do Curso">
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                      <div class="form-group">
+                          <label for="instituicao">Instituição</label>
+                          <input class="form-control" type="text" name="instituicao" id="instituicao" required placeholder="Instituição">
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="form-group">
+                          <label for="dt_inicio">Data de Início</label>
+                          <input class="form-control" type="date" id="dt_inicio" required name="dt_inicio">
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="form-group">
+                          <label for="dt_termino">Data de Termino</label>
+                          <input class="form-control" type="date" id="dt_termino" required name="dt_termino">
+                      </div>
+                  </div>
+              </div>
+          </div>
+           <div class="card-footer">
+                <button type="submit" class="btn btn-light text-light"  style="background-color:#20c6b6; font-weight:bold"><i class="far fa-save"></i> Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}

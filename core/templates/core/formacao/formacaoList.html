@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title_content %}Formações dos Colaboradores {% endblock %}
+{% block content %}
+<div class="card" >
+            <div class="card-header">
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Colaborador</th>
+                  <th>Tipo de Formação</th>
+                  <th>Nome do Curso</th>
+                  <th>Instituição</th>
+                  <th>Data de Início</th>
+                  <th>Data de Término</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for forma in object_list %}
+                <tr>
+                  <td>{{forma.colaborador}}</td>
+                  <td>{{forma.tipo_formacao}}</td>
+                  <td>{{forma.nome_curso}}</td>
+                  <td>{{forma.instituicao}}</td>
+                  <td>{{forma.dt_inicio}}</td>
+                  <td>{{forma.dt_termino}}</td>
+                  <td>
+                      <a href="{% url 'formacaoDelete' pk=forma.id %}"> <button type="button" class="btn bg-gradient-danger" data-toggle="tooltip" data-placement="top" title="Deletar"><i class="fas fa-trash"></i></button></a>
+                  </td>
+                </tr>
+                {% endfor%}
+                </tbody>
+                <tfoot>
+                <tr>
+                 <th>Colaborador</th>
+                  <th>Tipo de Formação</th>
+                  <th>Nome do Curso</th>
+                  <th>Instituição</th>
+                  <th>Data de Início</th>
+                  <th>Data de Término</th>
+                  <th></th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+{% endblock %}

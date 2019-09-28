@@ -1,10 +1,12 @@
 from django.contrib.auth.models import User
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DeleteView
 from django.views.generic.base import View
 
-from core.models import Colaborador, Formacao, Departamento, Funcao
+from core.models import Colaborador, Formacao, Departamento, Funcao, TipoFormacao
+
 
 # ============= Login View ==========================================
 class LoginView(View):
@@ -14,7 +16,9 @@ class LoginView(View):
 
 
 def dashboard(request, template_name='core/dashboard.html'):
-    return render(request, template_name)
+    colabCount = Colaborador.objects.count()
+    formaCount = Formacao.objects.count()
+    return render(request, template_name, context={'colabCount':colabCount,'formaCount':formaCount})
 
 # =============== Security ================================================
 # ============ Here starts User classes ===================================
@@ -94,3 +98,45 @@ class ColabDelete(DeleteView):
     model = Colaborador
     template_name = 'colaborador/colab_delete.html'
     success_url = reverse_lazy('colabList/')
+
+
+# =================== Here starts Academics Formations classes ===========================
+class FormacaoView(View):
+
+    def get(self,request):
+        colaborador = Colaborador.objects.values_list('nome', flat=True)
+        tipo_formacao = TipoFormacao.objects.values_list('tipo_formacao', flat=True)
+        context = {'colaborador':colaborador, 'tipoformacao':tipo_formacao}
+        template_name = 'core/formacao/formacaoRegister.html'
+        return render(request,template_name=template_name, context=context)
+
+
+    def post(self, request):
+        colaborador = request.POST['colaborador']
+        colaborador = Colaborador.objects.get(nome=colaborador)
+        tipo_formacao = request.POST['tipo_formacao']
+        tipo_formacao = TipoFormacao.objects.get(tipo_formacao=tipo_formacao)
+        nome_curso = request.POST['nome_curso']
+        instituicao = request.POST['instituicao']
+        dt_inicio = request.POST['dt_inicio']
+        dt_termino = request.POST['dt_termino']
+
+        formacao=Formacao.objects.create(colaborador=colaborador, tipo_formacao=tipo_formacao, nome_curso=nome_curso, instituicao=instituicao,
+                                         dt_inicio=dt_inicio, dt_termino=dt_termino)
+        formacao.save()
+        return redirect('formacaoList')
+
+    def FormacaoDelete(self, pk):
+        formacao = Formacao.objects.get(pk =pk)
+        formacao.delete()
+        return redirect('formacaoList')
+
+
+class FormacaoList(ListView):
+    model = Formacao
+    template_name = 'core/formacao/formacaoList.html'
+
+class FormacaoDelete(DeleteView):
+    model = Formacao
+    template_name = 'formacao/formaDelete.html'
+    success_url = reverse_lazy('formaList/')

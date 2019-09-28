@@ -35,7 +35,7 @@ class Colaborador(models.Model):
 
 
 class TipoFormacao(models.Model):
-    tipo_formacao = models.CharField(max_length=13, null=False, unique=True)
+    tipo_formacao = models.CharField(max_length=15, null=False, unique=True)
 
     class Meta:
         db_table = 'Tipo_Formacao'

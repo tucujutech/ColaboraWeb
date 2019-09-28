@@ -1,4 +1,33 @@
 {%extends 'base.html' %}
 {%block content %}
+<!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box text-light" style="background-color:#20c6b6">
+              <div class="inner">
+                <h3>{{colabCount}}</h3>
 
+                <p>{% if colabCount == 1 %}Colaborador{% endif %}{% if colabCount > 1 %}Colaboradores{% endif %}</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+            </div>
+          </div>
+          <! ---->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-light">
+              <div class="inner">
+                <h3 style="color:#20c6b6">{{formaCount}}</h3>
+
+                <p style="color:#20c6b6">{% if formaCount == 1 %}Formação Registrada{% endif %}{% if formaCount > 1 %}Formações Registradas{% endif %}</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-university" style="color:#20c6b6"></i>
+              </div>
+            </div>
+          </div>
+        </div>
 {% endblock %}
