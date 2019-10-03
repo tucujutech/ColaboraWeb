@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -81,11 +82,14 @@ class ColaboradorCreate(View):
         return redirect('colabList')
 
 
-class ColabList(ListView):
-    model = Colaborador
-    template_name = 'core/colaborador/colabList.html'
-
-
+class ColabList(View):
+    def get(self, request):
+        model = Colaborador.objects.all()
+        template_name = 'core/colaborador/colabList.html'
+        paginator = Paginator(model, 6)
+        page = request.GET.get('page')
+        object_list = paginator.get_page(page)
+        return render(request, template_name,{'object_list':object_list})
 
 
 # is missing detail view and generate report view
