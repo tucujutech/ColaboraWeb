@@ -1,15 +1,43 @@
 {% extends 'base.html' %}
-{% block title_content %}Formações dos Colaboradores {% endblock %}
+{% load static %}
+{% block title_content %} Perfil do colaborador {% for perf  in colaborador %}
+{{perf.nome}}
+{% endfor %}
+{% endblock %}
+
 {% block content %}
-<div class="card" >
-            <div class="card-header">
+<div class="card card-solid">
+    <div class="card-header">
+         <button class="btn bg-teal">Gerar Relatório <i class="far fa-file-alt"></i> </button>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <img src="{% static 'images/businessman .png' %}" alt="" class="img-circle img-fluid">
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
+            <div class="col">
+                {% for perf in colaborador %}
+                  <p>{{perf.nome}}</p>
+                <span>Nascido em {{perf.nascimento}}</span>
+                <span> RG: {{perf.rg}}</span>
+                <span> CPF:{{perf.cpf}}</span>
+                <p> Telefone:{{perf.telefone}}</p>
+                <p>Tipo CNH: {{perf.cnh_tipo}}</p>
+                {% if perf.cnh_tipo != 'Não Possui' %}<span>Num.CNH {{perf.cnh}}</span>{% endif %}
+                <p>Sexo {{perf.sexo_choices}}</p>
+                <p> Função: {{perf.funcao}}</p>
+                <span> Departamento: s{{perf.departamento}}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <h2>Formações</h2>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table  class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Colaborador</th>
                   <th>Tipo de Formação</th>
                   <th>Nome do Curso</th>
                   <th>Instituição</th>
@@ -19,9 +47,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for forma in object_list %}
+                {% for forma in formacao %}
                 <tr>
-                  <td>{{forma.colaborador}}</td>
                   <td>{{forma.tipo_formacao}}</td>
                   <td>{{forma.nome_curso}}</td>
                   <td>{{forma.instituicao}}</td>
@@ -41,19 +68,9 @@
                 </tr>
                 {% endfor%}
                 </tbody>
-                <tfoot>
-                <tr>
-                 <th>Colaborador</th>
-                  <th>Tipo de Formação</th>
-                  <th>Nome do Curso</th>
-                  <th>Instituição</th>
-                  <th>Data de Início</th>
-                  <th>Data de Término</th>
-                  <th></th>
-                </tr>
-                </tfoot>
               </table>
             </div>
-            <!-- /.card-body -->
-          </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

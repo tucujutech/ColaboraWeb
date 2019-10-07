@@ -92,6 +92,14 @@ class ColabList(View):
         return render(request, template_name,{'object_list':object_list})
 
 
+class PerfilColaboradorView(View):
+    def get(self,request,pk):
+        colaborador = Colaborador.objects.all().filter(pk=pk)
+        cola=Colaborador.objects.get(pk=pk)
+        formacao = Formacao.objects.all().filter(colaborador=cola)
+        template_name = 'core/colaborador/perfilColaborador.html'
+        context = {'colaborador':colaborador, 'formacao':formacao}
+        return render(request, template_name=template_name, context=context)
 # is missing detail view and generate report view
 
 
